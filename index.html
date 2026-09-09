@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 便利帳</title>
+<meta name="description" content="Claude Codeの便利な設定・組み合わせ・指示の出し方を集めたノート">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%92%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans+JP:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#F1F3EF;
+    --surface:#FFFFFF;
+    --surface-2:#E7EBE6;
+    --text:#1A231F;
+    --text-muted:#5C6B63;
+    --border:#D6DED8;
+    --accent:#2F6F5E;
+    --accent-soft:#DCEAE5;
+    --accent-2:#C97D3B;
+    --accent-2-soft:#F3E3D3;
+    --accent-3:#5B6FD6;
+    --accent-3-soft:#E2E4F8;
+    --other-soft:#E6E7E4;
+    --shadow: 0 1px 2px rgba(20,30,26,0.04), 0 6px 20px -8px rgba(20,30,26,0.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E1513;
+      --surface:#16201D;
+      --surface-2:#1E2A26;
+      --text:#E7EEEA;
+      --text-muted:#8CA097;
+      --border:#263531;
+      --accent:#57C9A6;
+      --accent-soft:#1D362E;
+      --accent-2:#E3A868;
+      --accent-2-soft:#3A2C1B;
+      --accent-3:#8C9BF2;
+      --accent-3-soft:#252A47;
+      --other-soft:#232E29;
+      --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 28px -10px rgba(0,0,0,0.45);
+    }
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"IBM Plex Sans JP","IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+    line-height:1.7;
+  }
+  .wrap{
+    max-width:840px;
+    margin:0 auto;
+    padding:32px 20px 96px;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  header{margin-bottom:28px;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:"Fraunces",serif;
+    font-weight:600;
+    font-size:clamp(28px,7vw,42px);
+    margin:0 0 12px;
+    text-wrap:balance;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    color:var(--text-muted);
+    font-size:15px;
+    max-width:56ch;
+    margin:0 0 22px;
+  }
+  .stats{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;
+    color:var(--text-muted);
+    border-top:1px solid var(--border);
+    padding-top:16px;
+  }
+  .stats b{color:var(--text); font-weight:500;}
+
+  .filterbar{
+    position:sticky;
+    top:0;
+    z-index:5;
+    background:var(--bg);
+    padding:14px 0;
+    margin-bottom:8px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .search{
+    width:100%;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:9px 12px;
+    font-size:16px;
+    font-family:inherit;
+    color:var(--text);
+  }
+  .search:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .search::placeholder{color:var(--text-muted);}
+  .filtergroup{display:flex; gap:6px; flex-wrap:wrap; align-items:center;}
+  .filtergroup .glabel{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    color:var(--text-muted);
+    margin-right:2px;
+  }
+  .chips{display:flex; gap:6px; flex-wrap:wrap;}
+  .chip{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text-muted);
+    border-radius:999px;
+    padding:6px 12px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .chip[aria-pressed="true"]{
+    background:var(--text);
+    color:var(--bg);
+    border-color:var(--text);
+  }
+  .chip:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  main{margin-top:24px;}
+  .week{margin-bottom:32px;}
+  .week h2{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;
+    font-weight:500;
+    color:var(--text-muted);
+    margin:0 0 14px;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .week h2 .count{color:var(--text); font-weight:500;}
+  .cards{display:flex; flex-direction:column; gap:12px;}
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 20px;
+    box-shadow:var(--shadow);
+  }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .card h3{
+    font-family:"Fraunces",serif;
+    font-weight:500;
+    font-size:18px;
+    margin:0;
+    text-wrap:balance;
+  }
+  .tagrow{display:flex; gap:6px; flex:none; flex-wrap:wrap; justify-content:flex-end;}
+  .tag{
+    flex:none;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    padding:3px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .tag[data-cat="setting"]{background:var(--accent-soft); color:var(--accent);}
+  .tag[data-cat="combo"]{background:var(--accent-2-soft); color:var(--accent-2);}
+  .tag[data-cat="prompting"]{background:var(--accent-3-soft); color:var(--accent-3);}
+  .tag[data-cat="other"]{background:var(--other-soft); color:var(--text-muted);}
+  .level{
+    flex:none;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    padding:3px 9px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    color:var(--text-muted);
+    white-space:nowrap;
+  }
+  .summary{color:var(--text); font-size:14.5px; margin:0 0 12px;}
+  .card-foot{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    color:var(--text-muted);
+    flex-wrap:wrap;
+  }
+  .card-foot .src{color:var(--accent);}
+  .card-foot .src::before{content:"↗ ";}
+
+  .state{text-align:center; padding:64px 20px; color:var(--text-muted);}
+  .state .glyph{font-size:28px; margin-bottom:14px;}
+  .state h2{
+    font-family:"Fraunces",serif;
+    color:var(--text);
+    font-size:20px;
+    font-weight:500;
+    margin:0 0 8px;
+  }
+  .state p{max-width:44ch; margin:0 auto; font-size:14px;}
+
+  footer{
+    margin-top:48px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    color:var(--text-muted);
+  }
+  footer a{color:var(--text-muted); text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Claude Code Tips Archive</p>
+    <h1>Claude Code 便利帳</h1>
+    <p class="lede">Claude Codeを使う上で役立つ設定・ツールの組み合わせ・効果的な指示の出し方を集めたノート。<a href="https://claude.ai/code/artifacts" target="_blank" rel="noopener">claude.ai上のライブ版</a>で毎週自動収集され、このサイトはそのスナップショットです。</p>
+    <div class="stats">
+      <span><b id="statCount">—</b> 件のTips</span>
+      <span>データ同期日: <b id="statUpdated">—</b></span>
+    </div>
+  </header>
+
+  <div class="filterbar">
+    <input class="search" id="search" type="text" placeholder="キーワードで検索(例: MCP, hooks, サブエージェント)">
+    <div class="filtergroup">
+      <span class="glabel">カテゴリ</span>
+      <div class="chips" id="chips">
+        <button class="chip" data-cat="all" aria-pressed="true">すべて</button>
+        <button class="chip" data-cat="setting" aria-pressed="false">設定</button>
+        <button class="chip" data-cat="combo" aria-pressed="false">組み合わせ</button>
+        <button class="chip" data-cat="prompting" aria-pressed="false">指示・プロンプト</button>
+        <button class="chip" data-cat="other" aria-pressed="false">その他</button>
+      </div>
+    </div>
+    <div class="filtergroup">
+      <span class="glabel">レベル</span>
+      <div class="chips" id="levelChips">
+        <button class="chip" data-level="all" aria-pressed="true">すべて</button>
+        <button class="chip" data-level="beginner" aria-pressed="false">初心者</button>
+        <button class="chip" data-level="intermediate" aria-pressed="false">中級</button>
+        <button class="chip" data-level="advanced" aria-pressed="false">上級</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <div class="state" id="loadingState">
+      <div class="glyph">⋯</div>
+      <p>読み込み中…</p>
+    </div>
+  </main>
+
+  <footer>
+    <a href="https://github.com/matsushima-ui/claude-code-benricho" target="_blank" rel="noopener">GitHubリポジトリ</a> ・ data/tips.json を直接編集・追記して更新します
+  </footer>
+</div>
+
+<script>
+  const CAT_LABEL = {setting:"設定", combo:"組み合わせ", prompting:"指示・プロンプト", other:"その他"};
+  const LEVEL_LABEL = {beginner:"初心者", intermediate:"中級", advanced:"上級"};
+  let allTips = [];
+  let ready = false;
+  let activeCat = "all";
+  let activeLevel = "all";
+  let query = "";
+
+  function fmtDate(iso){
+    if(!iso) return "";
+    const d = new Date(iso + "T00:00:00");
+    if(isNaN(d)) return iso;
+    return d.getFullYear() + "年" + (d.getMonth()+1) + "月" + d.getDate() + "日";
+  }
+  function weekRangeLabel(weekOf){
+    const start = new Date(weekOf + "T00:00:00");
+    if(isNaN(start)) return weekOf;
+    const end = new Date(start);
+    end.setDate(end.getDate() + 6);
+    const sameMonth = start.getMonth() === end.getMonth();
+    const s = (start.getMonth()+1) + "/" + start.getDate();
+    const e = sameMonth ? end.getDate() + "" : (end.getMonth()+1) + "/" + end.getDate();
+    return start.getFullYear() + "年" + s + "〜" + e + "の週";
+  }
+  function escapeHtml(s){
+    return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+
+  function render(){
+    const main = document.getElementById("main");
+    if(!ready){
+      main.innerHTML = '<div class="state"><div class="glyph">⋯</div><p>読み込み中…</p></div>';
+      return;
+    }
+    if(allTips.length === 0){
+      main.innerHTML =
+        '<div class="state">' +
+          '<div class="glyph">📒</div>' +
+          '<h2>Tipsが見つかりませんでした</h2>' +
+          '<p>data/tips.json を確認してください。</p>' +
+        '</div>';
+      document.getElementById("statCount").textContent = "0";
+      return;
+    }
+
+    document.getElementById("statCount").textContent = allTips.length;
+
+    const q = query.trim().toLowerCase();
+    const filtered = allTips.filter(t => {
+      if(activeCat !== "all" && t.category !== activeCat) return false;
+      if(activeLevel !== "all" && t.level !== activeLevel) return false;
+      if(!q) return true;
+      const hay = ((t.title||"") + " " + (t.summary||"") + " " + (t.source_name||"") + " " + (t.tags||[]).join(" ")).toLowerCase();
+      return hay.includes(q);
+    });
+
+    if(filtered.length === 0){
+      main.innerHTML = '<div class="state"><div class="glyph">🔍</div><p>条件に一致するTipsが見つかりませんでした。</p></div>';
+      return;
+    }
+
+    const weeks = [];
+    const byWeek = new Map();
+    for(const t of filtered){
+      const key = t.week_of || t.date_added || "unknown";
+      if(!byWeek.has(key)){
+        byWeek.set(key, []);
+        weeks.push(key);
+      }
+      byWeek.get(key).push(t);
+    }
+    weeks.sort().reverse();
+
+    main.innerHTML = weeks.map(wk => {
+      const items = byWeek.get(wk);
+      const cards = items.map(t => {
+        const cat = CAT_LABEL[t.category] ? t.category : "other";
+        const level = LEVEL_LABEL[t.level] ? t.level : null;
+        return (
+          '<article class="card">' +
+            '<div class="card-top">' +
+              '<h3>' + escapeHtml(t.title) + '</h3>' +
+              '<div class="tagrow">' +
+                (level ? '<span class="level">' + LEVEL_LABEL[level] + '</span>' : '') +
+                '<span class="tag" data-cat="' + cat + '">' + CAT_LABEL[cat] + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<p class="summary">' + escapeHtml(t.summary) + '</p>' +
+            '<div class="card-foot">' +
+              (t.source_url ? '<a class="src" href="' + escapeHtml(t.source_url) + '" target="_blank" rel="noopener">' + escapeHtml(t.source_name || "出典") + '</a>' : '<span>' + escapeHtml(t.source_name || "") + '</span>') +
+              '<span>' + fmtDate(t.date_added) + '</span>' +
+            '</div>' +
+          '</article>'
+        );
+      }).join("");
+      return '<section class="week"><h2>' + weekRangeLabel(wk) + ' <span class="count">(' + items.length + ')</span></h2><div class="cards">' + cards + '</div></section>';
+    }).join("");
+  }
+
+  document.getElementById("search").addEventListener("input", (e) => {
+    query = e.target.value;
+    render();
+  });
+  document.getElementById("chips").addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if(!btn) return;
+    activeCat = btn.dataset.cat;
+    document.querySelectorAll("#chips .chip").forEach(c => c.setAttribute("aria-pressed", c === btn ? "true" : "false"));
+    render();
+  });
+  document.getElementById("levelChips").addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if(!btn) return;
+    activeLevel = btn.dataset.level;
+    document.querySelectorAll("#levelChips .chip").forEach(c => c.setAttribute("aria-pressed", c === btn ? "true" : "false"));
+    render();
+  });
+
+  fetch("./data/tips.json")
+    .then(r => r.json())
+    .then(data => {
+      allTips = Array.isArray(data) ? data.slice().sort((a,b) => (b.date_added||"").localeCompare(a.date_added||"")) : [];
+      ready = true;
+      const latest = allTips.reduce((m,t) => (t.date_added && t.date_added > m ? t.date_added : m), "");
+      document.getElementById("statUpdated").textContent = latest ? fmtDate(latest) : "—";
+      render();
+    })
+    .catch(() => {
+      ready = true;
+      allTips = [];
+      render();
+    });
+</script>
+</body>
+</html>
