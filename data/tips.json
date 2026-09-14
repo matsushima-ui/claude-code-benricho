@@ -1,27 +1,279 @@
 [
   {
-    "id": "2026-09-09-desktop-notifications",
-    "title": "デスクトップ通知を有効にして待ち時間を減らす",
-    "summary": "settings.jsonで notifications: true にすると、長時間の処理が終わった時にシステム通知が届く。ターミナルを常時確認する必要がなくなり、他の作業と並行しやすくなる。",
-    "category": "setting",
-    "level": "beginner",
-    "source_name": "MindStudio ブログ",
-    "source_url": "https://www.mindstudio.ai/blog/12-claude-code-settings-enable-now",
-    "date_added": "2026-09-09",
-    "week_of": "2026-09-07",
-    "tags": ["settings.json", "notifications"]
+    "id": "2026-09-14-autonomy-vs-supervision-by-task-type",
+    "title": "タスクの性質で『自動承認モード』と『同期監督』を使い分ける",
+    "summary": "周辺的な機能やプロトタイピングは自動承認モードで自律的に進めさせ、ビジネスロジックの中核部分は詳細な指示を与えながら同期的に監督する、と使い分けると精度とスピードを両立できる。",
+    "category": "prompting",
+    "level": "intermediate",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "自動承認モード",
+      "タスク分類"
+    ]
   },
   {
-    "id": "2026-09-09-deny-dangerous-bash",
-    "title": "危険なBashコマンドを事前にブロックする",
-    "summary": "settings.jsonのbash.deniedCommandsに rm -rf や git push --force、sudo などを登録しておくと、Claudeがそれらのコマンドを実行できなくなる。本番環境や共有リポジトリでの誤操作事故を未然に防げる。",
+    "id": "2026-09-14-bash-edit-diff",
+    "title": "Bash経由のファイル編集も差分が自動表示に",
+    "summary": "v2.1.269のbashEditDiffEnabled設定を有効にすると、sedやpythonなどBashツール経由でファイルを編集した際に、その変更差分がツール結果へ自動的に添付されるようになる。Editツールを使わない書き換えでも何がどう変わったか毎回確認しやすくなる。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "bash",
+      "diff",
+      "v2.1.269"
+    ]
+  },
+  {
+    "id": "2026-09-14-claude-md-persona-for-designers",
+    "title": "CLAUDE.mdに自分のペルソナと制約を書いておく",
+    "summary": "「コーディング経験が少ないデザイナーなので、詳細な説明と小さく段階的な変更が必要」といった自己紹介をCLAUDE.mdに書いておくと、Claudeの応答の質が上がり非エンジニアでも扱いやすくなる。Anthropic社内のプロダクトデザインチームの実践例。",
     "category": "setting",
     "level": "beginner",
-    "source_name": "MindStudio ブログ",
-    "source_url": "https://www.mindstudio.ai/blog/12-claude-code-settings-enable-now",
-    "date_added": "2026-09-09",
-    "week_of": "2026-09-07",
-    "tags": ["settings.json", "safety", "bash"]
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "CLAUDE.md",
+      "non-engineer",
+      "persona"
+    ]
+  },
+  {
+    "id": "2026-09-14-claude-md-pin-tool-mistakes",
+    "title": "繰り返すツール呼び出しのミスはCLAUDE.mdでピンポイント修正する",
+    "summary": "「run pytestではなくpytestを直接実行する」「不要にcdしない」のように、Claudeが繰り返しがちな具体的なミスを名指しでCLAUDE.mdに書くと、一貫性が大きく改善する。Anthropic社内のRLエンジニアリングチームの実践例。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "CLAUDE.md",
+      "tool-use",
+      "consistency"
+    ]
+  },
+  {
+    "id": "2026-09-14-custom-slash-commands-for-repetition",
+    "title": "繰り返す作業はカスタムスラッシュコマンド化する",
+    "summary": "頻繁に行うワークフローをカスタムスラッシュコマンドにまとめておくと、毎回同じ説明を書かずに済み作業が高速化する。Anthropic社内ではセキュリティエンジニアリングチームが社内カスタムコマンドの半分を占めるほど活用している。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "slash-commands",
+      "automation"
+    ]
+  },
+  {
+    "id": "2026-09-14-focus-view-command",
+    "title": "/focusコマンドでツール呼び出しの詳細を非表示に",
+    "summary": "/focusを実行すると、プロンプト・1行の作業サマリー・最終応答だけを表示する集中ビューに切り替わり、長時間の自律作業中に流れる大量のツール呼び出しログを見ずに済む。v2.1.269からはスピナー表示の一部でこのコマンドを使う案内が出るようになり、改めて注目されている。もう一度実行すれば通常表示に戻せる。",
+    "category": "setting",
+    "level": "beginner",
+    "source_name": "Rubric Labs",
+    "source_url": "https://rubric.im/tips/claude-code-focus-view-command",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "focus",
+      "UI",
+      "v2.1.269"
+    ]
+  },
+  {
+    "id": "2026-09-14-iterate-dont-expect-one-shot",
+    "title": "一発で完璧な答えを期待せず、反復するパートナーとして扱う",
+    "summary": "Claudeにすぐ完璧な解決を求めるのではなく、少しずつやり取りしながら育てていく協力者として付き合うと結果が安定する。不慣れな領域のバグ調査でも、まず最小限の情報から始めてClaudeに案内してもらうとよい。",
+    "category": "prompting",
+    "level": "beginner",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "プロンプト",
+      "反復",
+      "マインドセット"
+    ]
+  },
+  {
+    "id": "2026-09-14-max-effort-level",
+    "title": "maxEffortLevelで思考の労力に上限を設定",
+    "summary": "v2.1.267で追加されたmaxEffortLevel設定(トップレベルまたはmodelSettings配下でモデルごと)を使うと、Bedrock/Vertex/Foundryを含む全プロバイダーで各リクエストの労力(effort)レベルに上限をかけられる。ユーザー自身はそれより低いレベルを選べるので、コスト超過の防止と柔軟性を両立できる。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "effort",
+      "cost",
+      "v2.1.267"
+    ]
+  },
+  {
+    "id": "2026-09-14-mcp-not-cli-for-sensitive-data",
+    "title": "機密データを扱うときはCLIではなくMCPサーバー経由にする",
+    "summary": "BigQuery CLIのような汎用CLIを直接使わせるより、専用のMCPサーバーを介してアクセスさせる方が、Claude Codeがアクセスできる範囲をきめ細かく制御でき、ログ記録やプライバシー配慮が必要なデータの取り扱いに向く。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "MCP",
+      "security",
+      "data-access"
+    ]
+  },
+  {
+    "id": "2026-09-14-output-style-headless",
+    "title": "/output-styleコマンドがヘッドレスでも使用可能に",
+    "summary": "v2.1.269で/output-style [name]コマンドが、Remote Controlやクラウド・ヘッドレスセッションを含む全セッション種別で出力スタイル(Concise、Explanatory等)を一覧表示・切り替えできるように追加された。ターミナル以外の実行環境からでも応答のトーンや形式をコマンド一つで変えられる。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "output-style",
+      "headless",
+      "v2.1.269"
+    ]
+  },
+  {
+    "id": "2026-09-14-paste-screenshots-for-ui",
+    "title": "UIの要望はスクリーンショットや画像貼り付けで伝える",
+    "summary": "作りたい画面のイメージをCommand+Vでスクリーンショットとして直接貼り付けると、テキストで説明するより早く正確に伝わる。モックアップ画像から動くプロトタイプをその場で生成させることもできる。",
+    "category": "prompting",
+    "level": "beginner",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "画像",
+      "プロトタイピング",
+      "UI"
+    ]
+  },
+  {
+    "id": "2026-09-14-plan-in-claude-ai-then-build",
+    "title": "Claude.aiで計画してからClaude Codeで実装する二段階ワークフロー",
+    "summary": "まずClaude.aiの会話でアイデアを練り、まとまった内容を段階的な実装プロンプトに要約させてからClaude Codeに渡すと、一度に圧倒されずに済む。Anthropic社内の法務チームなど非エンジニアのチームで有効だった進め方。",
+    "category": "combo",
+    "level": "beginner",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "Claude.ai",
+      "ワークフロー",
+      "非エンジニア"
+    ]
+  },
+  {
+    "id": "2026-09-14-plugin-eval-ablation",
+    "title": "claude plugin evalでプラグインの効果を定量評価",
+    "summary": "v2.1.269で追加されたclaude plugin evalは、同じテストケースをプラグイン有効時と無効時の両方で実行しスコアを比較する『アブレーションテスト』方式で、プラグインが実際に生む改善分(delta)を測定できる。5〜10件程度の代表的なケースに『発火してはいけないケース』を1つ加え、複数回実行してブレの有無も確認するのが実践的な使い方とされる。",
+    "category": "combo",
+    "level": "advanced",
+    "source_name": "aiidelist.com",
+    "source_url": "https://aiidelist.com/blog/claude-code-plugin-eval",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "plugin",
+      "eval",
+      "v2.1.269"
+    ]
+  },
+  {
+    "id": "2026-09-14-self-verifying-loop",
+    "title": "ビルド・テスト・lintを自動実行する自己検証ループを組む",
+    "summary": "Claudeが自分の作業をビルド・テスト・lintで自動検証できるようにしておくと、より長く自律的に作業させても自分のミスに気づいて修正できる。コードを書く前にテストから書かせると特に効果的。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "自律ループ",
+      "testing",
+      "lint"
+    ]
+  },
+  {
+    "id": "2026-09-14-slot-machine-workflow",
+    "title": "『スロットマシン』方式:時間を区切って自律作業→ダメなら最初からやり直す",
+    "summary": "作業前の状態を保存し、Claudeに30分ほど自律的に作業させ、うまくいけば採用、うまくいかなければ手直しせず最初からやり直す。中途半端な結果を人力で直すより、やり直す方が成功率が高いことが多い。",
+    "category": "combo",
+    "level": "intermediate",
+    "source_name": "Anthropic社内事例集『How Anthropic teams use Claude Code』",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "ワークフロー",
+      "checkpoint",
+      "自律作業"
+    ]
+  },
+  {
+    "id": "2026-09-14-symlink-deny-rule-fix",
+    "title": "シンボリックリンク越しのdeny回避を修正(v2.1.268)",
+    "summary": "Claude Code v2.1.268で、パスがシンボリックリンク経由の実体パス(macOSの/etc,/tmp,/var、Linuxの/bin等)で渡された場合にdeny/askルールが効かない不具合と、env -Cやevalを含む一行コマンドでdenyルールの解析が漏れる不具合が修正された。あわせて/mcpやclaude mcp listがMCP設定の${VAR}プレースホルダーから解決したシークレットを表示してしまう漏洩も塞がれたため、機密ディレクトリをdenyルールで守っている場合は必ずアップデートして挙動を確認したい。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "permissions",
+      "security",
+      "v2.1.268"
+    ]
+  },
+  {
+    "id": "2026-09-14-system-prompt-snapshot-off",
+    "title": "--system-prompt-snapshot offでプロンプトを毎回再描画",
+    "summary": "通常Claude Codeは会話開始時に記録したシステムプロンプトを使い続けるが、v2.1.267の--system-prompt-snapshot offを付けるとリクエストのたびに最新の内容でシステムプロンプトを再生成する。CLAUDE.mdやカスタム指示の文言を試行錯誤している最中に、変更をすぐ反映して確認したい場合に有効。",
+    "category": "prompting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "system-prompt",
+      "iteration",
+      "v2.1.267"
+    ]
+  },
+  {
+    "id": "2026-09-14-workflow-max-concurrent-agents",
+    "title": "Workflowツールの同時実行エージェント数上限を拡張",
+    "summary": "v2.1.269で追加された環境変数CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS(1〜256)を設定すると、Workflowツールで1回の実行あたり同時に動かせるエージェント数のデフォルト上限を引き上げられる。推論待ちがボトルネックになる大規模なファンアウト処理を高速化したい場合に使う。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-14",
+    "week_of": "2026-09-14",
+    "tags": [
+      "workflow",
+      "concurrency",
+      "v2.1.269"
+    ]
   },
   {
     "id": "2026-09-09-allowlist-safe-commands",
@@ -33,31 +285,26 @@
     "source_url": "https://smartscope.blog/en/generative-ai/claude/claude-code-best-practices-advanced-2026/",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["permissions", "allowlist"]
+    "tags": [
+      "permissions",
+      "allowlist"
+    ]
   },
   {
-    "id": "2026-09-09-plan-mode",
-    "title": "編集前にPlanモードでレビューする",
-    "summary": "claude --permission-mode plan、またはセッション中にShift+Tabで切り替えると、Claudeはファイルを読んで計画を提示するだけでディスクへの変更は行わない。変更前に内容を確認・承認したい慎重な作業に向く。",
+    "id": "2026-09-09-cd-persists-headless",
+    "title": "非対話モードでcdが持続するよう修正",
+    "summary": "v2.1.265で、-p+stream-jsonやAgent SDK、クラウドセッションなどの非対話セッションがメッセージのたびにシェルの作業ディレクトリをリセットしてしまう不具合が修正され、cdの効果がターンをまたいで保持されるようになった。複数ステップのヘッドレスなワークフローで意図しないパス戻りを気にしなくてよくなる。",
     "category": "setting",
-    "level": "beginner",
-    "source_name": "Claude Code 公式ドキュメント",
-    "source_url": "https://code.claude.com/docs/en/common-workflows",
-    "date_added": "2026-09-09",
-    "week_of": "2026-09-07",
-    "tags": ["plan mode", "review"]
-  },
-  {
-    "id": "2026-09-09-short-claude-md",
-    "title": "CLAUDE.mdは短く保ち、常時参照が必要な情報だけに絞る",
-    "summary": "長大なCLAUDE.mdは指示が無視されやすくなる。「削除したら間違えるか?」を基準に定期的に整理し、頻繁に使わないドメイン知識はSkillsへ移すと、コンテキスト消費を抑えつつ指示の遵守率を高められる。",
-    "category": "prompting",
     "level": "intermediate",
-    "source_name": "SmartScope Blog",
-    "source_url": "https://smartscope.blog/en/generative-ai/claude/claude-code-best-practices-advanced-2026/",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["CLAUDE.md", "context"]
+    "tags": [
+      "headless",
+      "SDK",
+      "v2.1.265"
+    ]
   },
   {
     "id": "2026-09-09-clear-after-two-failures",
@@ -69,79 +316,181 @@
     "source_url": "https://smartscope.blog/en/generative-ai/claude/claude-code-best-practices-advanced-2026/",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["/clear", "context freshness"]
+    "tags": [
+      "/clear",
+      "context freshness"
+    ]
   },
   {
-    "id": "2026-09-09-long-docs-on-top",
-    "title": "大きなドキュメントはプロンプトの上部、指示は下部に置く",
-    "summary": "20,000トークンを超えるような長文データを扱う場合、資料を先(上部)、質問や指示を後(下部)に置くと応答品質が最大30%向上するとされる。長文は<document>タグ等で区切ると誤解が減る。",
-    "category": "prompting",
-    "level": "intermediate",
-    "source_name": "Claude Platform Docs",
-    "source_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+    "id": "2026-09-09-deny-dangerous-bash",
+    "title": "危険なBashコマンドを事前にブロックする",
+    "summary": "settings.jsonのbash.deniedCommandsに rm -rf や git push --force、sudo などを登録しておくと、Claudeがそれらを実行できなくなる。本番環境や共有リポジトリでの誤操作事故を未然に防げる。",
+    "category": "setting",
+    "level": "beginner",
+    "source_name": "MindStudio ブログ",
+    "source_url": "https://www.mindstudio.ai/blog/12-claude-code-settings-enable-now",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["long context", "prompt structure"]
+    "tags": [
+      "settings.json",
+      "safety",
+      "bash"
+    ]
+  },
+  {
+    "id": "2026-09-09-desktop-notifications",
+    "title": "デスクトップ通知を有効にして待ち時間を減らす",
+    "summary": "settings.jsonで notifications: true にすると、長時間の処理が終わった時にシステム通知が届く。ターミナルを常時確認する必要がなくなり、他の作業と並行しやすくなる。",
+    "category": "setting",
+    "level": "beginner",
+    "source_name": "MindStudio ブログ",
+    "source_url": "https://www.mindstudio.ai/blog/12-claude-code-settings-enable-now",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "settings.json",
+      "notifications"
+    ]
+  },
+  {
+    "id": "2026-09-09-diff-panel",
+    "title": "/diffコマンドで変更をリアルタイム表示",
+    "summary": "Claude Code v2.1.260で追加された/diffコマンドは、フルスクリーンモード(幅110列以上)で会話の横に未コミットの変更差分をリアルタイム表示するパネルを開く。編集のたびにgit diffを打たなくても、エージェントが何を書き換えているか常に把握できる。",
+    "category": "setting",
+    "level": "beginner",
+    "source_name": "DevelopersIO (Classmethod)",
+    "source_url": "https://dev.classmethod.jp/en/articles/20260904-cc-updates-v2-1-260/",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "diff",
+      "fullscreen",
+      "v2.1.260"
+    ]
   },
   {
     "id": "2026-09-09-explain-why-not-just-dont",
-    "title": "「やってはいけないこと」ではなく理由を説明する",
-    "summary": "「省略記号を使わないで」ではなく「音声読み上げされるため省略記号を使わないで」のように背景・理由を添えると、Claudeはその理由から類似ケースにも一般化して対応しやすくなる。",
+    "title": "『やってはいけないこと』ではなく理由を説明する",
+    "summary": "『省略記号を使わないで』ではなく『音声読み上げされるため省略記号を使わないで』のように背景・理由を添えると、Claudeはその理由から類似ケースにも一般化して対応しやすくなる。",
     "category": "prompting",
     "level": "beginner",
     "source_name": "Claude Platform Docs",
     "source_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["prompting", "reasoning"]
+    "tags": [
+      "prompting",
+      "reasoning"
+    ]
   },
   {
     "id": "2026-09-09-hooks-are-mandatory",
-    "title": "Hooksでルールを「強制」し、CLAUDE.mdの指示だけに頼らない",
-    "summary": "「Hooksは強制、CLAUDE.mdは助言」という原則の通り、機密ファイルへの書き込み禁止などはPreToolUseフックでexit code 2にして物理的にブロックするのが確実。プロンプトでお願いするより再現性が高い。",
+    "title": "Hooksでルールを『強制』し、CLAUDE.mdの指示だけに頼らない",
+    "summary": "『Hooksは強制、CLAUDE.mdは助言』という原則の通り、機密ファイルへの書き込み禁止などはPreToolUseフックでexit code 2にして物理的にブロックするのが確実。プロンプトでお願いするより再現性が高い。",
     "category": "combo",
     "level": "advanced",
     "source_name": "SmartScope Blog",
     "source_url": "https://smartscope.blog/en/generative-ai/claude/claude-code-best-practices-advanced-2026/",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["hooks", "security"]
+    "tags": [
+      "hooks",
+      "security"
+    ]
   },
   {
-    "id": "2026-09-09-subagent-context-isolation",
-    "title": "サブエージェントで調査・レビューを独立したコンテキストに分離する",
-    "summary": "サブエージェントは呼び出し元と別のコンテキストウィンドウで動くため、大規模コードベースの調査結果だけをメイン会話に持ち帰らせることができる。先行する失敗や思い込みに引きずられない検証・レビューが可能になる。",
-    "category": "combo",
+    "id": "2026-09-09-long-docs-on-top",
+    "title": "大きなドキュメントはプロンプトの上部、指示は下部に置く",
+    "summary": "20,000トークンを超えるような長文データを扱う場合、資料を先(上部)、質問や指示を後(下部)に置くと応答品質が最大30%向上するとされる。長文資料は<document>タグ等で区切ると誤解が減る。",
+    "category": "prompting",
     "level": "intermediate",
+    "source_name": "Claude Platform Docs",
+    "source_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "long context",
+      "prompt structure"
+    ]
+  },
+  {
+    "id": "2026-09-09-output-max-chars",
+    "title": "bashOutputMaxCharsで出力上限を拡張",
+    "summary": "v2.1.261で追加されたbashOutputMaxCharsとtaskOutputMaxCharsをsettings.jsonに設定すると、コマンドやバックグラウンドタスクの出力をディスク保存する前に最大128Kまでインラインで受け取れる。長いビルドログやテスト結果を都度ファイル参照せず確認したい場合に有効。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "settings.json",
+      "output",
+      "v2.1.261"
+    ]
+  },
+  {
+    "id": "2026-09-09-permission-rule-fixes",
+    "title": "パーミッションルールの抜け穴を修正(v2.1.260)",
+    "summary": "v2.1.260で、パス中に括弧を含むdenyルールが無効扱いされ読み取り専用にしたいフォルダが書き込み可能になっていた不具合、不正な形式のdenyルールが1つあると全ての編集がエラーになっていた不具合、特定の変数に隠したコマンド置換でパーミッションチェックを回避できてしまう不具合が修正された。細かいdenyルールを組んでいる場合はアップデートして意図通りに保護されているか確認するとよい。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "DevelopersIO (Classmethod)",
+    "source_url": "https://dev.classmethod.jp/en/articles/20260904-cc-updates-v2-1-260/",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "permissions",
+      "security",
+      "v2.1.260"
+    ]
+  },
+  {
+    "id": "2026-09-09-plan-mode",
+    "title": "編集前にPlanモードでレビューする",
+    "summary": "claude --permission-mode plan、またはセッション中にShift+Tabで切り替えると、Claudeはファイルを読んで計画を提示するだけでディスクへの変更は行わない。変更前に内容を確認・承認したい慎重な作業に向く。",
+    "category": "setting",
+    "level": "beginner",
     "source_name": "Claude Code 公式ドキュメント",
     "source_url": "https://code.claude.com/docs/en/common-workflows",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["subagents", "context isolation"]
+    "tags": [
+      "plan mode",
+      "review"
+    ]
   },
   {
-    "id": "2026-09-09-skills-subagents-mcp-layers",
-    "title": "Skills・Subagents・MCPは役割で使い分ける",
-    "summary": "Skillsは段階的に読み込まれるためトークン効率が良く領域知識の提供に向き、Subagentsは複数ステップの結果をメイン会話に統合するのに向き、MCPは外部システムへの接続を担う。三者を組み合わせる構成が実運用での標準パターン。",
+    "id": "2026-09-09-plugin-dir-folder",
+    "title": "--plugin-dirでプラグインフォルダを一括読込",
+    "summary": "v2.1.265から--plugin-dirに複数プラグインを含むフォルダを指定できるようになり、マニフェストを持つ各サブフォルダが自動的に読み込まれる。実行中にフォルダへプラグインを追加・削除すると即座に反映されるため、社内プラグイン集の管理や開発中プラグインの試行錯誤が楽になる。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "plugin",
+      "plugin-dir",
+      "v2.1.265"
+    ]
+  },
+  {
+    "id": "2026-09-09-resume-prompt-cache",
+    "title": "サブエージェント再開でプロンプトキャッシュ維持",
+    "summary": "v2.1.265で、フォアグラウンド起動したサブエージェントを再開する際にツール一覧やシステムプロンプト接頭辞が変わってプロンプトキャッシュが効かなくなる不具合、およびエージェントチームのメンバーがSubagentStartフックの内容やプリロード済みスキルをプレフィックス外に移動させてしまう不具合が修正された。作り直すより既存のサブエージェント/チームメイトをresumeする方が、これからはキャッシュヒット率とコスト効率で有利になる。",
     "category": "combo",
     "level": "advanced",
-    "source_name": "Smith Horn Group (Substack)",
-    "source_url": "https://smithhorngroup.substack.com/p/choosing-between-skills-subagents",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["skills", "subagents", "MCP"]
-  },
-  {
-    "id": "2026-09-09-worktree-parallel-sessions",
-    "title": "git worktreeで並列セッションを衝突なく走らせる",
-    "summary": "claude --worktree feature-auth のようにgit worktreeごとに別チェックアウトを作れば、片方のターミナルで機能開発、もう片方でバグ修正を同時に進めても編集が衝突しない。複数タスクを並行して進めたい時に有効。",
-    "category": "combo",
-    "level": "intermediate",
-    "source_name": "Claude Code 公式ドキュメント",
-    "source_url": "https://code.claude.com/docs/en/common-workflows",
-    "date_added": "2026-09-09",
-    "week_of": "2026-09-07",
-    "tags": ["worktree", "parallel sessions"]
+    "tags": [
+      "subagent",
+      "prompt-cache",
+      "agent-teams"
+    ]
   },
   {
     "id": "2026-09-09-routines-vs-desktop-vs-actions",
@@ -153,6 +502,134 @@
     "source_url": "https://code.claude.com/docs/en/common-workflows",
     "date_added": "2026-09-09",
     "week_of": "2026-09-07",
-    "tags": ["routines", "scheduling"]
+    "tags": [
+      "routines",
+      "scheduling"
+    ]
+  },
+  {
+    "id": "2026-09-09-short-claude-md",
+    "title": "CLAUDE.mdは短く保ち、常時参照が必要な情報だけに絞る",
+    "summary": "長大なCLAUDE.mdは指示が無視されやすくなる。『削除したら間違えるか?』を基準に定期的に整理し、頻繁に使わないドメイン知識はSkillsへ移すと、コンテキスト消費を抑えつつ指示の遵守率を高められる。",
+    "category": "prompting",
+    "level": "intermediate",
+    "source_name": "SmartScope Blog",
+    "source_url": "https://smartscope.blog/en/generative-ai/claude/claude-code-best-practices-advanced-2026/",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "CLAUDE.md",
+      "context"
+    ]
+  },
+  {
+    "id": "2026-09-09-skill-doctor",
+    "title": "/skill-doctorで未使用スキルを可視化",
+    "summary": "v2.1.261で追加された/skill-doctorは、読み込まれているのに使われていないスキルと、それぞれが消費しているコンテキスト量を一覧表示する。同じタスクをスキルの有無で比較しながら「使用実績が少なく消費コストが大きいもの」から順に整理すると、コンテキストの無駄を安全に削減できる。",
+    "category": "other",
+    "level": "beginner",
+    "source_name": "ccleaks.com",
+    "source_url": "https://ccleaks.com/news/how-to-use-claude-code-skill-doctor-sep-2026",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "skill-doctor",
+      "context",
+      "v2.1.261"
+    ]
+  },
+  {
+    "id": "2026-09-09-skills-subagents-mcp-layers",
+    "title": "Skills・Subagents・MCPは役割で使い分ける",
+    "summary": "Skillsは段階的に読み込まれるためトークン効率が良く領域知識の提供に向き、Subagentsは複数ステップの結果をメイン会話に統合するのに向き、MCPは外部システムへの接続を担う。三者を組み合わせる構成が実運用での標準パターンとされている。",
+    "category": "combo",
+    "level": "advanced",
+    "source_name": "Smith Horn Group (Substack)",
+    "source_url": "https://smithhorngroup.substack.com/p/choosing-between-skills-subagents",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "skills",
+      "subagents",
+      "MCP"
+    ]
+  },
+  {
+    "id": "2026-09-09-subagent-context-isolation",
+    "title": "サブエージェントで調査・レビューを独立したコンテキストに分離する",
+    "summary": "サブエージェントは呼び出し元と別のコンテキストウィンドウで動くため、大規模コードベースの調査結果だけをメイン会話に持ち帰らせることができる。先行する失敗や思い込みに引きずられない、バイアスの少ない検証やコードレビューが可能になる。",
+    "category": "combo",
+    "level": "intermediate",
+    "source_name": "Claude Code 公式ドキュメント",
+    "source_url": "https://code.claude.com/docs/en/common-workflows",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "subagents",
+      "context isolation"
+    ]
+  },
+  {
+    "id": "2026-09-09-subagent-prompt-file",
+    "title": "サブエージェントのプロンプトをファイルから注入",
+    "summary": "v2.1.261で追加された--append-subagent-system-prompt-fileオプションを使うと、コマンドライン引数に収まらない長いシステムプロンプトをファイルから読み込んでサブエージェントに追記できる。詳細な役割定義や大量のルールを持つカスタムサブエージェントを組む際に便利。",
+    "category": "prompting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "subagent",
+      "system-prompt",
+      "CLI"
+    ]
+  },
+  {
+    "id": "2026-09-09-token-theft-warning",
+    "title": "インフォスティーラーによるトークン窃取に注意",
+    "summary": "TechCrunchの報道によれば、感染ソフトや不正広告経由で仕込まれるinfostealerマルウェアがブラウザに保存されたログインセッションを盗み、そこからClaude/Claude CodeのOAuthトークンを不正発行して利用量を消費させる被害が報告されている。心当たりのない利用量増加に気づいたら、パスワード変更とセッション失効・再ログイン、端末のマルウェアスキャンを行うのが実務的な対処になる。",
+    "category": "other",
+    "level": "beginner",
+    "source_name": "TechCrunch",
+    "source_url": "https://techcrunch.com/2026/09/08/hackers-are-stealing-claude-tokens-from-subscribers/",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "セキュリティ",
+      "OAuth",
+      "infostealer"
+    ]
+  },
+  {
+    "id": "2026-09-09-weekly-limit-cut",
+    "title": "週次利用上限、9/14引き下げへの備え",
+    "summary": "Pro/Max/TeamとEnterpriseの旧来型シートを対象に、9月13日で終了する週次上限50%引き上げ措置により9月14日以降は実質的な利用可能量が縮小する見込み。重い調査やリファクタリングは週前半に済ませる、判断が必要な作業は上位モデルに機械的作業は軽量モデルに振り分ける、常時接続の連携は必要な時だけ繋ぐ、といった対策で消費を抑えられる。",
+    "category": "other",
+    "level": "beginner",
+    "source_name": "FIXIT",
+    "source_url": "https://fixit.co.jp/tips/claude-code-weekly-limits-2026-09/",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "usage-limit",
+      "コスト管理",
+      "モデル選択"
+    ]
+  },
+  {
+    "id": "2026-09-09-worktree-parallel-sessions",
+    "title": "git worktreeで並列セッションを衝突なく走らせる",
+    "summary": "claude --worktree feature-auth のようにgit worktreeごとに別チェックアウトを作れば、片方のターミナルで機能開発、もう片方でバグ修正を同時に進めても編集が衝突しない。複数タスクを並行して進めたい時に有効。",
+    "category": "combo",
+    "level": "intermediate",
+    "source_name": "Claude Code 公式ドキュメント",
+    "source_url": "https://code.claude.com/docs/en/common-workflows",
+    "date_added": "2026-09-09",
+    "week_of": "2026-09-07",
+    "tags": [
+      "worktree",
+      "parallel sessions"
+    ]
   }
 ]
