@@ -1,5 +1,320 @@
 [
   {
+    "id": "2026-10-11-agent-sdk-plan-credits",
+    "title": "Max/TeamプランにAgent SDK用の月次APIクレジットが付与",
+    "summary": "2026年10月7日の公式サポート記事によると、Claude MaxおよびTeamプランには、Agent SDKやclaude -p、Claude API、Managed Agentsの利用に充てられる月次APIクレジットが新たに含まれるようになった。ただしこれらの利用はサブスクリプションの使用上限にも引き続きカウントされる点に注意。",
+    "category": "other",
+    "level": "beginner",
+    "source_name": "Claude公式サポート",
+    "source_url": "https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "Agent SDK",
+      "料金",
+      "Max",
+      "Team"
+    ]
+  },
+  {
+    "id": "2026-10-11-agent-tool-effort-param",
+    "title": "Agentツールにeffortパラメータが追加",
+    "summary": "v2.1.292(10/6)でAgentツール呼び出しに effort パラメータが追加され、サブエージェントごとに思考の労力レベル(low〜max)を個別指定できるようになった。簡単な調査は低effortで速く安く、難しい検証は高effortで、とタスクに応じて使い分けられる。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "Agent tool",
+      "effort",
+      "v2.1.292"
+    ]
+  },
+  {
+    "id": "2026-10-11-cockpit-mod",
+    "title": "Cockpit: セッション状況を一目で見られるmodパネル",
+    "summary": "/plugin install cockpit@cockpit-for-claude で導入できる、mod機能を使ったライブパネル。コンテキスト残量・レート制限・コスト・サブエージェントの動き・変更ファイル・テスト結果を一画面に表示し、リスクの高いコマンド実行前には確認を求めるガードも備える。v2.1.287以降が必要。",
+    "category": "combo",
+    "level": "intermediate",
+    "source_name": "GitHub (drkokorev/cockpit-for-claude)",
+    "source_url": "https://github.com/drkokorev/cockpit-for-claude",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "mod",
+      "plugin",
+      "可視化",
+      "v2.1.287"
+    ]
+  },
+  {
+    "id": "2026-10-11-code-review-max-findings",
+    "title": "/code-reviewの指摘件数をmax-findingsで調整",
+    "summary": "v2.1.288(10/2)で /code-review に --max-findings <n>|all オプションが追加され、通常の上限より多く(またはallで無制限に)指摘を出させられるようになった。一度指定すると --max-findings default で戻すまで設定が引き継がれるため、大規模PRのレビュー時に指摘漏れを減らせる。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "code-review",
+      "v2.1.288"
+    ]
+  },
+  {
+    "id": "2026-10-11-haiku-5-5-subagent",
+    "title": "Haiku 5.5をサブエージェント専用モデルに",
+    "summary": "10/7リリース(v2.1.293)のClaude Haiku 5.5は1Mコンテキストで価格は$0.10/$0.50(100Kトークンまで)と低コスト。.claude/agents/のagent定義でmodel: haikuを指定するか、settingsのenvでCLAUDE_CODE_SUBAGENT_MODEL=haiku・CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1を設定すれば、検索やテスト実行など軽い繰り返し作業をサブエージェントに安く任せられる。難しい判断はSonnet/Opusに残すのが推奨。",
+    "category": "combo",
+    "level": "intermediate",
+    "source_name": "apidog Blog",
+    "source_url": "https://apidog.com/blog/claude-haiku-5-5-claude-code/",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "Haiku 5.5",
+      "subagent",
+      "コスト",
+      "v2.1.293"
+    ]
+  },
+  {
+    "id": "2026-10-11-hooks-onfailure-block",
+    "title": "フック失敗時も確実にブロックするonFailure:block",
+    "summary": "v2.1.295(10/8)で、コマンド/HTTPフックに onFailure: \"block\" を設定できるようになった。フックがタイムアウトやエラーで失敗した場合に処理が素通りしてしまう事態を防ぎ、失敗時も対象のツール呼び出しを確実にブロックできる。セキュリティ目的のフックでは重要な設定。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "hooks",
+      "security",
+      "v2.1.295"
+    ]
+  },
+  {
+    "id": "2026-10-11-mod-feature-examples",
+    "title": "mod機能の具体例:Blast Radius・Token Weatherなど",
+    "summary": "v2.1.287で追加されたmodはHooksと異なり画面描画やツール呼び出しの書き換えまで行えるJS/TS拡張。削除系コマンド実行前に影響ファイル一覧を表示する『Blast Radius』や、残りコンテキストを天気で表現する『Token Weather』など具体例が紹介されている。コードが書けないユーザーでもClaude自身に欲しいmodを説明して作らせられる。",
+    "category": "combo",
+    "level": "beginner",
+    "source_name": "GameBusiness.jp",
+    "source_url": "https://www.gamebusiness.jp/article/2026/10/03/28210.html",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "mod",
+      "拡張機能",
+      "UI",
+      "v2.1.287"
+    ]
+  },
+  {
+    "id": "2026-10-11-mod-safe-build-guide",
+    "title": "自作modは読み取り専用から試し、plugin validateで検証",
+    "summary": "modはサンドボックス化されず、ユーザー権限でファイル・環境変数・ネットワークにアクセスできてしまうため、まずブランチ名表示のような読み取り専用の小さなmodから試すのが安全とされる。claude plugin validate ./modディレクトリ で実行せずにイベント処理とAPI呼び出しを確認でき、claude --safe-modeで一時的に無効化もできる。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "ToolJunction Blog",
+    "source_url": "https://www.tooljunction.io/blog/claude-code-mods",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "mod",
+      "セキュリティ",
+      "plugin validate",
+      "safe-mode"
+    ]
+  },
+  {
+    "id": "2026-10-11-paste-preview-mod",
+    "title": "貼り付けた画像をその場で注釈・編集できるmod",
+    "summary": "ターミナルに画像を貼り付けると通常は[Image #1]としか表示されないが、このmodはサムネイルを表示し、送信前にペンや矢印・テキストで画像に注釈を加えられるエディタを開く。GhosttyやkittyなどKitty Graphics Protocol対応ターミナルでサムネイル表示が可能。要Claude Code 2.1.291以降。",
+    "category": "combo",
+    "level": "beginner",
+    "source_name": "GitHub (alan890104/claude-code-paste-preview)",
+    "source_url": "https://github.com/alan890104/claude-code-paste-preview",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "mod",
+      "画像",
+      "UI",
+      "v2.1.291"
+    ]
+  },
+  {
+    "id": "2026-10-11-plugin-install-marketplace-flag",
+    "title": "claude plugin installに--marketplaceフラグ",
+    "summary": "v2.1.292(10/6)で claude plugin install に --marketplace <source> フラグが追加され、同名プラグインが複数のマーケットプレイスに存在する場合でもインストール元を明示的に指定できるようになった。社内マーケットプレイスと公式マーケットプレイスを併用している場合に便利。",
+    "category": "setting",
+    "level": "beginner",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "plugin",
+      "marketplace",
+      "v2.1.292"
+    ]
+  },
+  {
+    "id": "2026-10-11-read-tool-allow-large",
+    "title": "Readツールのallow_largeで巨大ファイルも読み込み可能に",
+    "summary": "v2.1.296(10/9)でReadツールに allow_large オプションが追加され、通常のサイズ制限を超える大きなテキストファイルや長い行範囲を、分割せずに読み込めるようになった。巨大なログファイルやデータファイルの全体を一度に確認したい場合に有効。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "Read",
+      "ファイル",
+      "v2.1.296"
+    ]
+  },
+  {
+    "id": "2026-10-11-routines-publish-artifact-no-ask",
+    "title": "スケジュール済みRoutineがArtifactを確認なしで公開可能に",
+    "summary": "v2.1.292(10/6)で、スケジュール実行されるRoutine(定期タスク)がプライベートなArtifactを、ユーザーへの確認を求めずに公開できるようになった。無人実行中にダッシュボードやナレッジベースのArtifactを自動更新するワークフロー(本タスクのような定期調査ルーティン含む)が組みやすくなる。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "routines",
+      "artifact",
+      "自動化",
+      "v2.1.292"
+    ]
+  },
+  {
+    "id": "2026-10-11-sonnet-cache-read-price-half",
+    "title": "Sonnet 5.5のキャッシュ読み取り価格が半額に",
+    "summary": "v2.1.296(10/9)で、Sonnet 5.5のプロンプトキャッシュ読み取り価格が100万トークンあたり$0.20から$0.10へ半額になった。長いCLAUDE.mdやシステムプロンプトを使うセッションほどキャッシュ再利用の恩恵が大きく、実質的なコスト削減につながる。",
+    "category": "other",
+    "level": "beginner",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "コスト",
+      "キャッシュ",
+      "v2.1.296"
+    ]
+  },
+  {
+    "id": "2026-10-11-subagent-model-tiering",
+    "title": "モデルを使い分けてPro枠を節約するサブエージェント構成",
+    "summary": "メインをOpus、下調べ役scoperをHaiku 5.5、実装役implementerをSonnet 5.5、コミット・PR作成役shipperをHaiku 5.5(low effort)に分けると、Claude Proの5時間枠内で作れるPR数が約10件から16件程度に増え、PRあたりコストも下がったという実践例。リスクの高い変更の時だけOpusのレビュアーサブエージェントを追加で呼ぶ。",
+    "category": "combo",
+    "level": "advanced",
+    "source_name": "Andrea Grandi Blog",
+    "source_url": "https://www.andreagrandi.it/posts/claude-code-subagents-to-save-usage/",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "subagent",
+      "コスト",
+      "Haiku",
+      "Sonnet",
+      "Opus"
+    ]
+  },
+  {
+    "id": "2026-10-11-subagent-skill-preload-cap",
+    "title": "サブエージェントのスキル事前読込は最大32個に制限",
+    "summary": "v2.1.295(10/8)で、サブエージェントが事前に読み込むスキル数が最大32個に制限された。多数のスキルを持つ環境でサブエージェントのコンテキスト消費が意図せず膨らむのを防げる一方、重要なスキルが32個を超える場合は優先順位付けや不要スキルの無効化を見直す必要がある。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "skills",
+      "subagent",
+      "コンテキスト",
+      "v2.1.295"
+    ]
+  },
+  {
+    "id": "2026-10-11-terse-plugin",
+    "title": "terseプラグインで冗長な応答を削減しコストも抑える",
+    "summary": "/plugin marketplace add lowenbjer/claude-terse → /plugin install terse@terse で導入できるプラグイン。装飾的な言い回しや毎回の前置きを禁止するルールと、コンテキスト使用率が37%/49%で警告色に変わるステータスライン用メーターを追加でき、出力トークンを平均4割前後削減したと報告されている。",
+    "category": "combo",
+    "level": "intermediate",
+    "source_name": "GitHub (lowenbjer/claude-terse)",
+    "source_url": "https://github.com/lowenbjer/claude-terse",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "plugin",
+      "mod",
+      "コスト",
+      "出力スタイル"
+    ]
+  },
+  {
+    "id": "2026-10-11-websearch-budget-hourly-refill",
+    "title": "WebSearchの利用上限が時間あたり補充式に変更",
+    "summary": "v2.1.290(10/5)で、WebSearchの利用上限が『200回使ったら終了』という方式から『1時間あたり100回まで補充される』方式に変更された。長時間の調査タスクでも時間を置けば検索を使い続けられるようになり、深い多段階リサーチに向く。",
+    "category": "setting",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "WebSearch",
+      "調査",
+      "v2.1.290"
+    ]
+  },
+  {
+    "id": "2026-10-11-workflow-subagent-model-env",
+    "title": "Workflowのサブエージェント既定モデルをENVで指定",
+    "summary": "v2.1.296(10/9)で追加された環境変数CLAUDE_CODE_WORKFLOW_SUBAGENT_MODELを設定すると、Workflowツールが生成するサブエージェントの既定モデルを一括指定できる。安価なHaiku系などに振り分けてコストを抑えつつ、個々のagent()呼び出しごとの上書きも可能。",
+    "category": "setting",
+    "level": "advanced",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "Workflow",
+      "環境変数",
+      "コスト",
+      "v2.1.296"
+    ]
+  },
+  {
+    "id": "2026-10-11-you-should-know-mod",
+    "title": "『You should know』モッドで見落とし検知",
+    "summary": "v2.1.287(10/1)で追加されたビルトインモッド『You should know』は、裏側で別エージェントが作業を監視し、ユーザーやClaude自身が見落としそうな点をフラグしてくれる。/plugin enable cc-plugin-you-should-know@builtin で有効化できる(テレメトリ有効なfirst-partyセッション向け)。",
+    "category": "combo",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog",
+    "date_added": "2026-10-11",
+    "week_of": "2026-10-05",
+    "tags": [
+      "mod",
+      "safety",
+      "v2.1.287"
+    ]
+  },
+  {
     "id": "2026-09-14-autonomy-vs-supervision-by-task-type",
     "title": "タスクの性質で『自動承認モード』と『同期監督』を使い分ける",
     "summary": "周辺的な機能やプロトタイピングは自動承認モードで自律的に進めさせ、ビジネスロジックの中核部分は詳細な指示を与えながら同期的に監督する、と使い分けると精度とスピードを両立できる。",
