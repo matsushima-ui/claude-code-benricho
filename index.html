@@ -359,7 +359,17 @@
       }
       byWeek.get(key).push(t);
     }
-    weeks.sort().reverse();
+        const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+    weeks.sort((a, b) => {
+      const aValid = DATE_RE.test(a);
+      const bValid = DATE_RE.test(b);
+      if(aValid && bValid) return b.localeCompare(a); // 日付として降順(新しい週が先頭)
+      if(aValid !== bValid) return aValid ? -1 : 1;    // 日付形式のキーを優先し、不正なキーは後ろへ
+      return a.localeCompare(b);                       // どちらも不正な形式なら安定した順序に
+    });
+    if(weeks.some(wk => !DATE_RE.test(wk))){
+      console.warn("Claude Code 便利帳: week_of/date_added が不正な形式のTipsがあります。該当の週は末尾に表示されます。", weeks.filter(wk => !DATE_RE.test(wk)));
+    }
 
     main.innerHTML = weeks.map(wk => {
       const items = byWeek.get(wk);
