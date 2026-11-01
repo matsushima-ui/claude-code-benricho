@@ -1,5 +1,251 @@
 [
   {
+    "category": "other",
+    "date_added": "2026-11-02",
+    "level": "beginner",
+    "source_name": "Anthropic News",
+    "source_url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+    "summary": "Anthropicは10月22日、Claude Codeのスキル(SKILL.md形式)が使うオープン規格「Agent Skills」を、MCPに続いてLinux Foundation傘下のAgentic AI Foundationに寄贈したと発表した。ChatGPTやCursor、GitHub Copilotなど約70のプラットフォームが対応し、公開スキル数は約100万、インストール数は約2.8億に達しているという。",
+    "tags": [
+      "Agent Skills",
+      "標準化",
+      "Agentic AI Foundation"
+    ],
+    "title": "Agent Skills標準がAgentic AI Foundationに移管",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-agent-skills-donated-aaif"
+  },
+  {
+    "category": "setting",
+    "date_added": "2026-11-02",
+    "level": "advanced",
+    "source_name": "Claude Code Changelog (GitHub)",
+    "source_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+    "summary": "v2.1.314(10/30)で追加されたpermissions.blockWritesOutsideWorkingDirectoriesを有効にすると、Write/Edit/NotebookEditがどの権限モードでも作業ディレクトリ外へのファイル書き込みを拒否するようになる。既存のblockReadsOutsideWorkingDirectoriesと組み合わせれば読み書き両方を作業ディレクトリ内に閉じ込められる。",
+    "tags": [
+      "permissions",
+      "settings.json",
+      "security",
+      "v2.1.314"
+    ],
+    "title": "書き込みを作業ディレクトリ外に拒否する設定",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-block-writes-outside-workdir"
+  },
+  {
+    "category": "combo",
+    "date_added": "2026-11-02",
+    "level": "intermediate",
+    "source_name": "GitHub (jdbrewer/ccfleet) / Hacker News",
+    "source_url": "https://github.com/jdbrewer/ccfleet",
+    "summary": "「ccfleet」はtmux上で複数のClaude Codeセッションをダッシュボード表示するツール。どのペインが返信待ちか、完了したか、作業中か(10分以上動きがなければアイドル扱い)、他セッションとファイル/ブランチが衝突していないかを一目で確認でき、1キーで該当ペインへジャンプできる。フックやデーモンは不要でClaude自身のセッションファイルとtmuxだけを読む。",
+    "tags": [
+      "tmux",
+      "並列セッション",
+      "OSS",
+      "Show HN"
+    ],
+    "title": "ccfleet:複数のClaude Codeセッションをtmuxで一覧管理",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-ccfleet-tmux-dashboard"
+  },
+  {
+    "category": "combo",
+    "date_added": "2026-11-02",
+    "level": "beginner",
+    "source_name": "GitHub (adamkdean/claude-chalk) / Hacker News",
+    "source_url": "https://github.com/adamkdean/claude-chalk",
+    "summary": "「claude-chalk」はClaude Codeのmod機能を使い、Claudeの地の文の応答にchalk-template記法(例:{red Build failed})で色をつけさせ、別のフックで実際のターミナル色として描画するプラグイン。成功・失敗・警告などが視覚的に区別しやすくなり、コードブロックやヘッドレス実行(claude -p)には影響しない。",
+    "tags": [
+      "mod",
+      "UI",
+      "Show HN"
+    ],
+    "title": "claude-chalk:ターミナル応答を色付けするmod",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-claude-chalk-colored-output"
+  },
+  {
+    "category": "other",
+    "date_added": "2026-11-02",
+    "level": "intermediate",
+    "source_name": "Claude Code Changelog (GitHub)",
+    "source_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+    "summary": "v2.1.312(10/27)で、非常に大きなCLAUDE.mdやルールファイル、@で読み込んだファイルの冒頭だけを見て全体を書き換えてしまう不具合が修正された。Writeツールは今後、ファイル全体を読んでから書き換えるか、その場編集(Edit)を使うようClaudeに求めるようになる。",
+    "tags": [
+      "CLAUDE.md",
+      "Write",
+      "バグ修正",
+      "v2.1.312"
+    ],
+    "title": "巨大なCLAUDE.mdの誤った上書きを防止",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-claude-md-overwrite-protection"
+  },
+  {
+    "category": "other",
+    "date_added": "2026-11-02",
+    "level": "intermediate",
+    "source_name": "Claude Platform API Release Notes",
+    "source_url": "https://platform.claude.com/docs/en/release-notes/api",
+    "summary": "10月28日、Claude Platform(第一パーティAPI)のMessages APIおよびToken Counting APIの最大リクエストサイズが32MBから128MBに引き上げられた。大きな添付ファイルや長大なプロンプトを送る用途で上限に引っかかりにくくなる。",
+    "tags": [
+      "API",
+      "リクエストサイズ"
+    ],
+    "title": "APIの最大リクエストサイズが32MBから128MBに拡大",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-max-request-size-128mb"
+  },
+  {
+    "category": "combo",
+    "date_added": "2026-11-02",
+    "level": "advanced",
+    "source_name": "GitHub (grimmerk/memsaga) / Hacker News",
+    "source_url": "https://github.com/grimmerk/memsaga",
+    "summary": "「memsaga」はCLAUDE.mdや自動メモリファイル、スキルの変更をセッションIDやタイトル付きでgitリポジトリにコミットし、差分プレビュー付きで復元したり複数端末間で同期したりできるツール。過去のセッション記録を再生して履歴を再構築する機能も備える。",
+    "tags": [
+      "CLAUDE.md",
+      "メモリ",
+      "git",
+      "OSS"
+    ],
+    "title": "memsaga:CLAUDE.md/メモリ/スキルをgitで管理・同期",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-memsaga-git-sync"
+  },
+  {
+    "category": "other",
+    "date_added": "2026-11-02",
+    "level": "beginner",
+    "source_name": "jeman.net / Hacker News",
+    "source_url": "https://jeman.net/nekot/",
+    "summary": "「Nekot」はClaude Code(およびCodex)の5時間利用枠の消費状況を監視し、80%/95%に達すると通知する無料のiOS/iPadOSアプリ。サーバーやアカウント登録は不要で認証情報は端末のKeychainに保存され、ウィジェットや7日間の履歴表示、Siriショートカットにも対応する。",
+    "tags": [
+      "usage-limit",
+      "iOS",
+      "アプリ"
+    ],
+    "title": "Nekot:利用上限が近いと警告するiOSアプリ",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-nekot-usage-limit-app"
+  },
+  {
+    "category": "combo",
+    "date_added": "2026-11-02",
+    "level": "intermediate",
+    "source_name": "GitHub (globalmpc/nomore) / Hacker News",
+    "source_url": "https://github.com/globalmpc/nomore",
+    "summary": "GitHub上で公開された「nomore」は、約1万件のGitHub issueから厳選した20個のCLAUDE.mdルール集と、過去のセッション記録を解析して『毎回繰り返し指示している内容』を見つけ、採用・編集・却下を選べる形でルール化を提案するローカルCLI(npx @globalmpc/nomore)をセットで提供する。LLM呼び出しや外部送信は一切なく、同じ指摘を毎回繰り返す手間を減らせる。",
+    "tags": [
+      "CLAUDE.md",
+      "OSS",
+      "Show HN"
+    ],
+    "title": "nomore:繰り返す指示をCLAUDE.mdルール化",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-nomore-claude-md-rules"
+  },
+  {
+    "category": "other",
+    "date_added": "2026-11-02",
+    "level": "beginner",
+    "source_name": "Claude Platform API Release Notes",
+    "source_url": "https://platform.claude.com/docs/en/release-notes/api",
+    "summary": "Claude Code / Claude Platform API共通の告知として、Claude Opus 4.8のFast modeが2026年10月30日付で非推奨となり、2026年11月30日に提供終了する予定。Fast modeを使っている場合はOpus 5.5への移行を早めに検討する必要がある。",
+    "tags": [
+      "Opus 4.8",
+      "Fast mode",
+      "deprecation",
+      "v2.1.316"
+    ],
+    "title": "Opus 4.8のFast modeが廃止予定に",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-opus-4-8-fast-mode-deprecated"
+  },
+  {
+    "category": "prompting",
+    "date_added": "2026-11-02",
+    "level": "intermediate",
+    "source_name": "nickyt.co(Hacker News経由)",
+    "source_url": "https://www.nickyt.co/blog/how-i-used-claude-code-to-speed-up-my-shell-startup-by-95percent",
+    "summary": "シェル起動時間を95%短縮した実例で示された手法。まずClaudeに触らせる前に自分で複数回計測して基準値を取り、次にどの行がどれだけ重いかを具体的に診断させ、重い初期化処理は初回使用時まで遅延実行する関数に包ませ、安定した出力はソースが変わるまでキャッシュさせ、最後に数値で再計測して効果を検証させる。改善を『感覚』でなく毎回数値で確認させるのがポイント。",
+    "tags": [
+      "パフォーマンス",
+      "プロンプト",
+      "計測"
+    ],
+    "title": "性能改善は『計測→診断→遅延化→再計測』で依頼する",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-performance-debug-workflow"
+  },
+  {
+    "category": "other",
+    "date_added": "2026-11-02",
+    "level": "intermediate",
+    "source_name": "Claude Code Changelog (GitHub)",
+    "source_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+    "summary": "v2.1.311(10/26)で、通常コンテキストのセッションがリクエストが20万トークンを超えた際に『1Mコンテキストには利用クレジットが必要』というエラーで止まっていた不具合が修正され、今後は会話を自動的に圧縮(compact)して継続するようになった。長い調査タスクが途中で止まりにくくなる。",
+    "tags": [
+      "コンテキスト",
+      "compaction",
+      "バグ修正",
+      "v2.1.311"
+    ],
+    "title": "20万トークン超えでエラーにならず自動圧縮に",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-standard-context-auto-compact"
+  },
+  {
+    "category": "setting",
+    "date_added": "2026-11-02",
+    "level": "advanced",
+    "source_name": "Claude Code Changelog (GitHub)",
+    "source_url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+    "summary": "v2.1.316(10/31)で追加された環境変数CLAUDE_CODE_SUBAGENT_EFFORTを設定すると、メインセッションのeffortレベルとは独立して、起動する全サブエージェントの既定effortレベルを一括指定できる。個々のAgent呼び出しごとのeffort指定や既存のmaxEffortLevelと組み合わせて使い分けられる。",
+    "tags": [
+      "subagent",
+      "effort",
+      "環境変数",
+      "v2.1.316"
+    ],
+    "title": "サブエージェント既定effortを環境変数で指定",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-subagent-effort-env-var"
+  },
+  {
+    "category": "prompting",
+    "date_added": "2026-11-02",
+    "level": "intermediate",
+    "source_name": "Claude Code公式changelog",
+    "source_url": "https://code.claude.com/docs/en/changelog.md",
+    "summary": "v2.1.311(10/26)で、ターミナルでの「ultrathink」キーワードがOpus 5.5・Sonnet 5.5・Haiku 5.5・Fable 5.1上でそのターンをxhigh effortで実行するようになった。作業中に入力した場合は残りのターンのeffortを上げる効果もあり、対応モデルの場合のみ虹色表示される。",
+    "tags": [
+      "ultrathink",
+      "effort",
+      "v2.1.311"
+    ],
+    "title": "ultrathinkがxhigh effortに直結(主要モデル限定)",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-ultrathink-xhigh-effort"
+  },
+  {
+    "category": "other",
+    "date_added": "2026-11-02",
+    "level": "advanced",
+    "source_name": "Claude Platform API Release Notes",
+    "source_url": "https://platform.claude.com/docs/en/release-notes/api",
+    "summary": "10月29日、Claude PlatformにUsage and Cost Analytics APIがベータ公開され、モデル・ワークスペース・APIキー・ユーザー単位で使用量とコストを絞り込み・集計できるようになった。従来のUsage and Cost APIや一部のEnterprise Analytics APIエンドポイントはレガシー扱いになる(引き続き利用可能)。",
+    "tags": [
+      "API",
+      "コスト管理",
+      "Enterprise"
+    ],
+    "title": "Usage and Cost Analytics APIがベータ公開",
+    "week_of": "2026-11-02",
+    "id": "2026-11-02-usage-cost-analytics-api"
+  },
+  {
     "category": "setting",
     "date_added": "2026-10-26",
     "level": "beginner",
